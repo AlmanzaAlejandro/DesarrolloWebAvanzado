@@ -18,7 +18,7 @@ Route::get('/dashboard', function () {
 
     // Redirigir según el rol del usuario autenticado
     if ($user->role === 'organizador') {
-        return redirect()->route('organizer.dashboard');
+        return redirect()->route('organizer.index');
     } elseif ($user->role === 'asistente') {
         return redirect()->route('asistente.dashboard');
     }
