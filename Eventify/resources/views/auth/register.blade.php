@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen flex items-center justify-center bg-gray-100">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-            <h1 class="text-3xl font-semibold text-center text-blue-600 mb-6">Bienvenido a Eventify</h1>
+            <h1 class="text-3xl font-semibold text-cencdter text-blue-600 mb-6">Bienvenido a Eventify</h1>
             <p class="text-center text-gray-500 mb-8">Por favor, regístrate para continuar.</p>
 
             <form method="POST" action="{{ route('register') }}">
