@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         // Redirigir según el rol del usuario
         if ($user->role === 'organizador') {
-            return redirect()->route('organizador.dashboard');
+            return redirect()->route('organizer.index');
         } else {
             return redirect()->route('asistente.dashboard');
         }
