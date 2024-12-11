@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Event;
 use App\Http\Controllers\OrganizerDashboardController;
@@ -20,7 +21,7 @@ Route::get('/dashboard', function () {
     if ($user->role === 'organizador') {
         return redirect()->route('organizer.index');
     } elseif ($user->role === 'asistente') {
-        return redirect()->route('asistente.dashboard');
+        return redirect()->route('attendee.index');
     }
 
     // Redirigir a una página de error o predeterminada si el rol no es válido
@@ -46,9 +47,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Rutas del dashboard del asistente
-    Route::prefix('asistente')->name('asistente.')->group(function () {
-        Route::get('/dashboard', [AttendeeDashboardController::class, 'index'])->name('dashboard');
+    Route::prefix('attendee')->name('attendee.')->group(function () {
+        Route::get('/dashboard', [AttendeeDashboardController::class, 'index'])->name('index');
     });
+
+    Route::get('/tickets/purchase/{event}', [TicketController::class, 'purchase'])->name('tickets.purchase');
 });
 
 require __DIR__.'/auth.php';
