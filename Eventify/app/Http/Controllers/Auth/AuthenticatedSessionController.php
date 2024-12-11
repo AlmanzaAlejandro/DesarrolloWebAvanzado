@@ -37,7 +37,8 @@ class AuthenticatedSessionController extends Controller
         if ($user->role === 'organizador') {
             return redirect()->route('organizer.index');
         } else {
-            return redirect()->route('asistente.dashboard');
+            //return redirect()->route('asistente.dashboard');
+            return redirect()->route('attendee.index');
         }
     }
 
