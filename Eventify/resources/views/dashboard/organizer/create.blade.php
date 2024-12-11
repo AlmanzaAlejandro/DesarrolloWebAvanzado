@@ -19,7 +19,7 @@
             <h1 class="text-3xl font-semibold text-green-700 mb-6 text-center">Crear Nuevo Evento</h1>
 
             <!-- Formulario de creación de evento -->
-            <form action="{{ route('organizer.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('organizer.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
 
                 <!-- Campo Título -->
@@ -66,6 +66,17 @@
                         id="location"
                         class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                         required
+                    >
+                </div>
+                <!-- Campo Imagen -->
+                <div>
+                    <label for="image" class="block text-sm font-semibold text-green-700">Imagen</label>
+                    <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        accept="image/*"
+                        class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                     >
                 </div>
 

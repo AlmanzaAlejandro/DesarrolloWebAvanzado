@@ -45,7 +45,9 @@
                 @foreach($events as $event)
                     <!-- Tarjeta de Evento -->
                     <div class="bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-                        <img src="{{ $event->image_url ?? 'https://via.placeholder.com/400x200' }}" alt="Evento {{ $event->title }}" class="w-full h-48 object-cover">
+                        @if ($event->image)
+                            <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->title }}" class="w-full h-auto mt-4">
+                        @endif
                         <div class="p-4">
                             <h3 class="text-lg font-bold text-gray-800">{{ $event->title }}</h3>
                             <p class="text-sm text-gray-500 mt-2">{{ $event->description }}</p>

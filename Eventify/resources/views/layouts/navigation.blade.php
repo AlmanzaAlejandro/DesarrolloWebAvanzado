@@ -12,9 +12,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Perfil de organizador') }}
-                    </x-nav-link>
+                    <!-- Enlace de perfil basado en el rol del usuario -->
+                    @if (auth()->user()->role === 'organizador')
+                        <x-nav-link :href="route('organizer.index')" :active="request()->routeIs('organizer.index')">
+                            {{ __('Perfil de organizador') }}
+                        </x-nav-link>
+                    @elseif (auth()->user()->role === 'asistente')
+                        <x-nav-link :href="route('attendee.index')" :active="request()->routeIs('attendee.index')">
+                            {{ __('Perfil de asistente') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -43,7 +50,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -89,7 +96,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
