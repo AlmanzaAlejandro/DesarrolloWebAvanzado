@@ -50,6 +50,7 @@
                             <th class="p-4">Título</th>
                             <th class="p-4">Fecha</th>
                             <th class="p-4">Ubicación</th>
+                            <th class="p-4">Comentario</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,6 +59,24 @@
                                 <td class="border-t p-4">{{ $ticket->event->title }}</td>
                                 <td class="border-t p-4">{{ \Carbon\Carbon::parse($ticket->event->event_date)->format('d M Y') }}</td>
                                 <td class="border-t p-4">{{ $ticket->event->location }}</td>
+                                <td class="border-t p-4">
+                                    <!-- Formulario de comentario -->
+                                    <form action="{{ route('events.addComment', $ticket->event->id) }}" method="POST">
+                                        @csrf
+                                        <textarea name="comment" class="w-full p-2 border border-gray-300 rounded" rows="3" placeholder="Deja tu comentario..." required></textarea>
+                                        <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Enviar Comentario</button>
+                                    </form>
+
+                                    <!-- Mostrar comentarios existentes -->
+                                    <div class="mt-4">
+                                        @foreach ($ticket->event->comments as $comment)
+                                            <div class="border-t pt-2">
+                                                <strong>{{ $comment->user->name }}:</strong>
+                                                <p>{{ $comment->content }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
