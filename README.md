@@ -36,12 +36,12 @@ Asegúrate de tener instalados los siguientes componentes:
 4. Configura las variables de entorno en el archivo `.env`, especialmente las relacionadas con la base de datos:
 
    ```env
-DB_CONNECTION=mysql
-DB_HOST=****
-DB_PORT=25060
-DB_DATABASE=db_eventify
-DB_USERNAME=doadmin
-DB_PASSWORD=****
+   DB_CONNECTION=mysql
+   DB_HOST=****
+   DB_PORT=25060
+   DB_DATABASE=db_eventify
+   DB_USERNAME=doadmin
+   DB_PASSWORD=****
    ```
 
 5. Genera la clave de la aplicación:
