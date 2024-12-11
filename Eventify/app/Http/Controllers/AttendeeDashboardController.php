@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Ticket;
 
 class AttendeeDashboardController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener el término de búsqueda desde el input
+        $events = Event::latest()->get();
+        $userTickets = Ticket::where('user_id', auth()->id())->with('event')->get();
         $search = $request->input('search');
 
         // Si hay un término de búsqueda, filtrar los eventos
@@ -23,6 +25,6 @@ class AttendeeDashboardController extends Controller
         }
 
         // Pasar los eventos y el término de búsqueda a la vista
-        return view('dashboard.attendee.index', compact('events', 'search'));
+        return view('dashboard.attendee.index', compact('events', 'userTickets','search'));
     }
 }
