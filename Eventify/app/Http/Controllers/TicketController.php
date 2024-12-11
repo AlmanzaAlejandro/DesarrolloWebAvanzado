@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Carbon\Carbon;
 
 class TicketController extends Controller
 {
@@ -62,6 +63,35 @@ class TicketController extends Controller
 
         // Retorna la vista con los tickets
         return view('tickets.myTickets', compact('userTickets'));
+    }
+
+    public function myEvents()
+    {
+        $user = auth()->user();
+
+        // Obtener los tickets del usuario
+        $tickets = $user->tickets()->with('event')->get();
+
+        // Filtrar los eventos pasados y futuros
+        $upcomingEvents = $tickets->filter(function ($ticket) {
+            return Carbon::parse($ticket->event->event_date)->isFuture();
+        });
+
+        $pastEvents = $tickets->filter(function ($ticket) {
+            return Carbon::parse($ticket->event->event_date)->isPast();
+        });
+
+        // Ordenar los eventos por fecha
+        $upcomingEvents = $upcomingEvents->sortBy(function ($ticket) {
+            return Carbon::parse($ticket->event->event_date);
+        });
+
+        $pastEvents = $pastEvents->sortByDesc(function ($ticket) {
+            return Carbon::parse($ticket->event->event_date);
+        });
+
+        // Devolver la vista con los eventos pasados y futuros
+        return view('tickets.myEvents', compact('upcomingEvents', 'pastEvents'));
     }
 
 }

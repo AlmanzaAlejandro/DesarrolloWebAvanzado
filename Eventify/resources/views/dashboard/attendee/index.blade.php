@@ -15,6 +15,14 @@
         </a>
     </div>
 
+    <!-- Botón para ver mis eventos -->
+    <div class="mt-6 text-center">
+        <a href="{{ route('tickets.myEvents') }}"
+           class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow transition">
+            Mis Eventos
+        </a>
+    </div>
+
     <div class="bg-gradient-to-br from-blue-100 to-gray-100 min-h-screen">
         <div class="container mx-auto py-8 px-4">
             <div class="flex justify-between items-center mb-6">
