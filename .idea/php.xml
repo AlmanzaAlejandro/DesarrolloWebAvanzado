@@ -140,11 +140,20 @@
       <path value="$PROJECT_DIR$/Eventify/vendor/sebastian/global-state" />
       <path value="$PROJECT_DIR$/Eventify/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/Eventify/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/Eventify/vendor/symfony/polyfill-intl-icu" />
+      <path value="$PROJECT_DIR$/Eventify/vendor/moneyphp/money" />
+      <path value="$PROJECT_DIR$/Eventify/vendor/laravel/cashier" />
+      <path value="$PROJECT_DIR$/Eventify/vendor/stripe/stripe-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/Eventify/phpunit.xml" custom_loader_path="$PROJECT_DIR$/Eventify/vendor/autoload.php" paratest_path="$PROJECT_DIR$/Eventify/vendor/bin/paratest_for_phpstorm" use_configuration_file="true" />
+    </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
     <option name="transferred" value="true" />

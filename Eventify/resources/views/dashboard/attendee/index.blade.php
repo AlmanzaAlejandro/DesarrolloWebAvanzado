@@ -7,21 +7,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Botón para ver los tickets comprados -->
-    <div class="mt-6 text-center">
-        <a href="{{ route('tickets.myTickets') }}"
-           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition">
-            Mis Tickets Comprados
-        </a>
-    </div>
-
     <div class="bg-gradient-to-br from-blue-100 to-gray-100 min-h-screen">
         <div class="container mx-auto py-8 px-4">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-4xl font-extrabold text-gray-800">Eventos Disponibles</h1>
             </div>
+
             <!-- Barra de búsqueda -->
             <form method="GET" action="{{ route('attendee.index') }}" class="mb-6">
+
+                <div class="mt-6 mb-6 flex justify-end">
+                    <a href="{{ route('tickets.myTickets') }}"
+                       class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition">
+                        Tickets Comprados
+                    </a>
+                </div>
+
                 <div class="flex">
                     <input
                         type="text"
@@ -77,5 +78,5 @@
                 </div>
             @endif
         </div>
-
+    </div>
 @endsection

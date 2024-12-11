@@ -6,8 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Eventify/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/Eventify/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/Eventify/tests" isTestSource="true" packagePrefix="Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/Eventify/tests/Feature" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Eventify/tests/Unit" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/brianium/paratest" />
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/carbonphp/carbon-doctrine-types" />
@@ -131,6 +129,10 @@
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/laravel/cashier" />
+      <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/moneyphp/money" />
+      <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/stripe/stripe-php" />
+      <excludeFolder url="file://$MODULE_DIR$/Eventify/vendor/symfony/polyfill-intl-icu" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
