@@ -69,6 +69,13 @@ Asegúrate de tener instalados los siguientes componentes:
    npm run dev
    ```
 
+9. Ejecuta:
+
+    ```bash
+   composer require laravel/cashier
+   php artisan vendor:publish --tag="cashier-config"
+   ```
+
 ## Ejecución
 
 Inicia el servidor de desarrollo de Laravel:
