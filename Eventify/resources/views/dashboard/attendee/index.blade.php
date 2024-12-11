@@ -7,50 +7,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1 class="mb-4">Lista de Eventos</h1>
-
-        <!-- Barra de búsqueda -->
-        <form method="GET" action="{{ route('attendee.index') }}" class="mb-4">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Buscar eventos..." value="{{ $search ?? '' }}">
-                <button type="submit" class="btn btn-primary">Buscar</button>
+    <div class="bg-gradient-to-br from-blue-100 to-gray-100 min-h-screen">
+        <div class="container mx-auto py-8 px-4">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-4xl font-extrabold text-gray-800">Eventos Disponibles</h1>
             </div>
-        </form>
+            <!-- Barra de búsqueda -->
+            <form method="GET" action="{{ route('attendee.index') }}" class="mb-6">
+                <div class="flex">
+                    <input
+                        type="text"
+                        name="search"
+                        class="w-full rounded-l-lg border-gray-300 focus:ring-blue-400 focus:border-blue-400"
+                        placeholder="Buscar eventos..."
+                        value="{{ $search ?? '' }}"
+                    />
+                    <button
+                        type="submit"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-r-lg transition"
+                    >
+                        Buscar
+                    </button>
+                </div>
+            </form>
 
-        @if($events->isEmpty())
-            <p>No se encontraron eventos.</p>
-        @else
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>Fecha del Evento</th>
-                    <th>Ubicación</th>
-                    <th>Precio del Ticket</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($events as $event)
-                    <tr>
-                        <td>{{ $event->title }}</td>
-                        <td>{{ $event->description }}</td>
-                        <td>{{ $event->event_date }}</td>
-                        <td>{{ $event->location }}</td>
-                        <td>${{ number_format($event->price, 2) }}</td>
-                        <td>
-                            <!-- Botón para comprar tickets -->
-                            <a href="{{ route('tickets.purchase', $event->id) }}" class="btn btn-success">Comprar Tickets</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @endif
-
-        <h2 class="mt-5">Tus Tickets Comprados</h2>
+            @if($events->isEmpty())
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-6">
+                    <p>No se encontraron eventos.</p>
+                </div>
+            @else
+                <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                    <table class="min-w-full border-collapse bg-white">
+                        <thead>
+                        <tr class="bg-blue-600 text-white text-left">
+                            <th class="p-4">Título</th>
+                            <th class="p-4">Descripción</th>
+                            <th class="p-4">Fecha</th>
+                            <th class="p-4">Ubicación</th>
+                            <th class="p-4 text-center">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($events as $event)
+                            <tr class="hover:bg-blue-50 transition">
+                                <td class="border-t p-4">{{ $event->title }}</td>
+                                <td class="border-t p-4 text-gray-600">{{ $event->description }}</td>
+                                <td class="border-t p-4">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
+                                <td class="border-t p-4">{{ $event->location }}</td>
+                                <td class="border-t p-4 flex justify-center">
+                                    <a
+                                        href="{{ route('tickets.purchase', $event->id) }}"
+                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow transition"
+                                    >
+                                        Comprar Tickets
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+      <h2 class="mt-5">Tus Tickets Comprados</h2>
 
         @if($userTickets->isEmpty())
             <p>No has comprado tickets aún.</p>
