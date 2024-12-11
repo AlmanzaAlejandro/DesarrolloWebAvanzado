@@ -51,7 +51,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AttendeeDashboardController::class, 'index'])->name('index');
     });
 
+    // Rutas para tickets
     Route::get('/tickets/purchase/{event}', [TicketController::class, 'purchase'])->name('tickets.purchase');
+    Route::post('/tickets/complete/{event}', [TicketController::class, 'complete'])->name('tickets.complete');
 });
 
 require __DIR__.'/auth.php';
