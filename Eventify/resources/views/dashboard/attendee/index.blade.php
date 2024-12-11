@@ -12,7 +12,6 @@
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-4xl font-extrabold text-gray-800">Eventos Disponibles</h1>
             </div>
-
             <!-- Barra de búsqueda -->
             <form method="GET" action="{{ route('attendee.index') }}" class="mb-6">
                 <div class="flex">
@@ -70,5 +69,31 @@
                 </div>
             @endif
         </div>
+      <h2 class="mt-5">Tus Tickets Comprados</h2>
+
+        @if($userTickets->isEmpty())
+            <p>No has comprado tickets aún.</p>
+        @else
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Cantidad de Tickets</th>
+                    <th>Precio Total</th>
+                    <th>Fecha de Compra</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($userTickets as $ticket)
+                    <tr>
+                        <td>{{ $ticket->event->title }}</td>
+                        <td>{{ $ticket->quantity }}</td>
+                        <td>${{ number_format($ticket->price * $ticket->quantity, 2) }}</td>
+                        <td>{{ $ticket->created_at->format('d-m-Y') }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection
