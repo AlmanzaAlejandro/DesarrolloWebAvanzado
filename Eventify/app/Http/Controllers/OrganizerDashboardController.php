@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizerDashboardController extends Controller
 {
-    // Muestra todos los eventos
+    // Muestra todos los eventos del usuario logeado
     public function index()
     {
-        $events = Event::all(); // Obtener todos los eventos
+        $events = Event::where('user_id', Auth::id())->get(); // Obtener solo los eventos del usuario logeado
         return view('dashboard.organizer.index', compact('events'));
     }
 
@@ -29,14 +30,22 @@ class OrganizerDashboardController extends Controller
             'description' => 'nullable|string',
             'event_date' => 'required|date',
             'location' => 'required|string|max:255',
+            'image' => 'nullable|image|max:2048',
         ]);
+        $imagePath = null;
 
-        // Crear el evento
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('events', 'public'); // Almacena la imagen en storage/app/public/events
+        }
+
+        // Crear el evento asociándolo al usuario logeado
         Event::create([
             'title' => $request->title,
             'description' => $request->description,
             'event_date' => $request->event_date,
             'location' => $request->location,
+            'user_id' => Auth::id(),
+            'image' => $imagePath,
         ]);
 
         // Redirigir con mensaje de éxito
@@ -46,12 +55,22 @@ class OrganizerDashboardController extends Controller
     // Muestra el formulario para editar un evento existente
     public function edit(Event $event)
     {
+        // Verificar que el evento pertenece al usuario logeado
+        if ($event->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para editar este evento.');
+        }
+
         return view('dashboard.organizer.edit', compact('event'));
     }
 
     // Actualiza un evento existente
     public function update(Request $request, Event $event)
     {
+        // Verificar que el evento pertenece al usuario logeado
+        if ($event->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para actualizar este evento.');
+        }
+
         // Validación de los datos
         $request->validate([
             'title' => 'required|string|max:255',
@@ -75,6 +94,11 @@ class OrganizerDashboardController extends Controller
     // Elimina un evento
     public function destroy(Event $event)
     {
+        // Verificar que el evento pertenece al usuario logeado
+        if ($event->user_id !== Auth::id()) {
+            abort(403, 'No tienes permiso para eliminar este evento.');
+        }
+
         $event->delete(); // Eliminar el evento
 
         // Redirigir con mensaje de éxito
