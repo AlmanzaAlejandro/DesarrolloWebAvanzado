@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     // Rutas para tickets
     Route::get('/tickets/purchase/{event}', [TicketController::class, 'purchase'])->name('tickets.purchase');
     Route::post('/tickets/buy/{eventId}', [TicketController::class, 'buy'])->name('tickets.buy');
-
+    Route::get('/mis-tickets', [TicketController::class, 'myTickets'])->name('tickets.myTickets');
 });
 
 require __DIR__.'/auth.php';

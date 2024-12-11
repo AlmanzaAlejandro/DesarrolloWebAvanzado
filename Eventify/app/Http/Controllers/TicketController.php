@@ -55,6 +55,15 @@ class TicketController extends Controller
         return redirect()->route('attendee.index')->with('success', 'Compra realizada con éxito');
     }
 
+    public function myTickets()
+    {
+        // Obtener los tickets del usuario autenticado
+        $userTickets = auth()->user()->tickets()->with('event')->get(); // Asegúrate de cargar el evento relacionado
+
+        // Retorna la vista con los tickets
+        return view('tickets.myTickets', compact('userTickets'));
+    }
+
 }
 
 

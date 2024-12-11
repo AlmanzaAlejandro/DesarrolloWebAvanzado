@@ -7,6 +7,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Botón para ver los tickets comprados -->
+    <div class="mt-6 text-center">
+        <a href="{{ route('tickets.myTickets') }}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow transition">
+            Mis Tickets Comprados
+        </a>
+    </div>
+
     <div class="bg-gradient-to-br from-blue-100 to-gray-100 min-h-screen">
         <div class="container mx-auto py-8 px-4">
             <div class="flex justify-between items-center mb-6">
@@ -69,31 +77,5 @@
                 </div>
             @endif
         </div>
-      <h2 class="mt-5">Tus Tickets Comprados</h2>
 
-        @if($userTickets->isEmpty())
-            <p>No has comprado tickets aún.</p>
-        @else
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Evento</th>
-                    <th>Cantidad de Tickets</th>
-                    <th>Precio Total</th>
-                    <th>Fecha de Compra</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($userTickets as $ticket)
-                    <tr>
-                        <td>{{ $ticket->event->title }}</td>
-                        <td>{{ $ticket->quantity }}</td>
-                        <td>${{ number_format($ticket->price * $ticket->quantity, 2) }}</td>
-                        <td>{{ $ticket->created_at->format('d-m-Y') }}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
 @endsection
